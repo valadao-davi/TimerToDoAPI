@@ -3,12 +3,12 @@ package com.valadao_davi.todolist.dto;
 import com.valadao_davi.todolist.entities.Priority;
 import com.valadao_davi.todolist.entities.Status;
 import com.valadao_davi.todolist.entities.Task;
-import org.springframework.beans.BeanUtils;
 
 
 public class TaskDTO {
 
     private Long idTask;
+    private Long userId;
     private String nameTask;
     private Double durationTask;
     private Priority priority;
@@ -16,10 +16,14 @@ public class TaskDTO {
 
     public TaskDTO(){}
 
-    public TaskDTO(Task entity) {
-        BeanUtils.copyProperties(entity, this);
+    public TaskDTO(Task task) {
+        this.idTask = task.getIdTask();
+        this.nameTask = task.getNameTask();
+        this.durationTask = task.getDurationTask();
+        this.priority = task.getPriority();
+        this.status = task.getStatus();
+        this.userId = task.getUser() != null ? task.getUser().getUserId() : null;
     }
-
     public Long getIdTask() {
         return idTask;
     }
@@ -60,4 +64,11 @@ public class TaskDTO {
         this.status = status;
     }
 
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 }
